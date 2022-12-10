@@ -39,6 +39,6 @@ X_train, X_test, y_train, y_test = train_test_split(
     face_dataset, y, train_size=0.99, stratify=face_labels)
 
 # knn = KNeighborsClassifier(n_neighbors=1000, weights='distance', p=2)
-knn = KNeighborsClassifier(n_neighbors=1000, weights='uniform', algorithm='auto',
+knn = KNeighborsClassifier(n_neighbors=len(a), weights='uniform', algorithm='auto',
                            leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
-knn.fit(X_train, y_train)
+knn.fit(face_dataset, y)
