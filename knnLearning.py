@@ -12,6 +12,7 @@ face_data = []
 labels = []
 names = {}
 class_id = 0
+n_neighbors = 0
 face_section = np.zeros((100, 100), dtype='uint8')
 dirpath = "imgs"
 for file in os.listdir("imgs"):
@@ -22,6 +23,7 @@ for file in os.listdir("imgs"):
         target = class_id * np.ones((data_item.shape[0],))
         class_id += 1
         labels.append(target)
+    n_neighbors = n_neighbors + 1
 face_dataset = np.concatenate(face_data, axis=0)
 face_labels = np.concatenate(labels, axis=0).reshape((-1, 1))
 vector = np.vectorize(np.int_)
@@ -38,7 +40,8 @@ for range in a:
 X_train, X_test, y_train, y_test = train_test_split(
     face_dataset, y, train_size=0.99, stratify=face_labels)
 
-# knn = KNeighborsClassifier(n_neighbors=1000, weights='distance', p=2)
-knn = KNeighborsClassifier(n_neighbors=len(a), weights='uniform', algorithm='auto',
-                           leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
-knn.fit(face_dataset, y)
+# knn = KNeighborsClassifier(n_neighbors=250, weights='uniform', algorithm='auto',
+#                            leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
+
+knn = KNeighborsClassifier()
+knn.fit(X_train, y_train)

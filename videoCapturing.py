@@ -22,7 +22,7 @@ while True:
     if ret == False:
         continue
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(frame, 1.3, 5)
+    faces = face_cascade.detectMultiScale(gray_frame, 1.3, 5)
     faces = sorted(faces, key=lambda f: f[2] * f[3])
     for face in faces[-1:]:
         x, y, w, h = face

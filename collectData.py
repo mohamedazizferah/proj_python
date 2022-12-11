@@ -30,6 +30,8 @@ while True:
     if skip % 5 == 0:
         face_data.append(face_section)
     skip += 1
+    if len(face_data) == 500:
+        break
     key_pressed = cv2.waitKey(1) & 0xFF
     if key_pressed == ord('s'):
         break
